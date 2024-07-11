@@ -1,7 +1,7 @@
 ﻿# My projects
 # QGroundControl
 ## Translations in qgc <br>
-----
+
 Строки для перевода, помеченные методами tr() и qstr() для c++ и qml соответственно, хранятся в .json файлах. Для обновления переводов есть парсер [python json parser](https://github.com/mavlink/qgroundcontrol/blob/master/translations/qgc-lupdate-json.py), который ищет все .json файлы, собирает строки для перевода и преобразует в qgc.ts файл формата xml, находящийся в папке translations. 
 
 ### Способы перевода 
@@ -24,8 +24,7 @@ linguist
 ``` 
 pip install googletrans==4.0.0rc1
 ```
----
-2. Запустить в терминале указав аргументы (путь к скрипту, "путь к файлу перевода", исходный язык, язык для перевода)
+2. Запустить в терминале указав аргументы (путь к скрипту, "путь к файлу перевода", исходный язык, язык для перевода),например так:
 
 ``` 
 python3 ~/qgroundcontrol/translations/tr.py "~/qgroundcontrol/translations/qgc_source_el_GR.ts" en ru
