@@ -81,16 +81,13 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 17)"
 1.Download the latest version for your operating system [Android SDK command line tools](https://developer.android.com/studio/#command-line-tools-only)
 
 2.Unpack to the appropriate path:
-
-	* #### Linux: ~/Android/Sdk/
-
-	* #### macOS: ~/Library/Android/sdk/
+	* **Linux**: ~/Android/Sdk/
+	* **macOS**: ~/Library/Android/sdk/
   	or
   	```
   	brew install android-commandlinetool
   	```
-
-  	* #### Windows: C:\Users\<USER>\AppData\Local\Android\Sdk\
+	* **Windows**: C:\Users\<USER>\AppData\Local\Android\Sdk\
 
 >You can also install the official integrated development environment (IDE) for Android app development and configure the following packages to be built through the app. [android-studio](https://developer.android.com/studio).
 
