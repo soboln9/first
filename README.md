@@ -127,6 +127,7 @@ __armeabi-v7a (GCC 4.9, Qt 6.6.3)__
 > Требуется JDK17. Вы можете подтвердить, что он используется, просмотрев настройки проекта: Проекты> Управление наборами> Устройства> Android (вкладка)> Настройки Android> Расположение JDK. В том же окне можно проверить SDK и NDK.
 
 * Сборка с использованием значков "hammer" (или "play"):
+![png](https://docs.qgroundcontrol.com/master/assets/qt_creator_build_qgc.ACO6OjKV.png)
 
 
 
