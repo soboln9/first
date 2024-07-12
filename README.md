@@ -1,10 +1,4 @@
-<<<<<<< Updated upstream
-﻿# My projects
-# QGroundControl
-=======
-﻿QGroundControl
->>>>>>> Stashed changes
-## Translations in qgc <br>
+﻿## Translations in qgc <br>
 
 Strings to be translated, marked with the tr() and qstr() methods for C++ and qml respectively, are stored in .json files. To update translations there is a parser [python json parser](https://github.com/mavlink/qgroundcontrol/blob/master/translations/qgc-lupdate-json.py), which searches all .json files, collects strings for translation and converts an xml file located in the translations folder into qgc.ts.
 
@@ -69,7 +63,7 @@ sudo apt install libxcb-cursor0
 * **Jdk**
 >QGC supports java 17 and higher.
 
-####Linux:
+#### Linux:
 ```
 sudo apt-get install openjdk-17-jdk
 nano ~/.bashrc
@@ -133,22 +127,3 @@ __armeabi-v7a (GCC 4.9, Qt 6.6.3)__
 * Building using the "hammer" (or "play") icons:
 
 ![png](https://docs.qgroundcontrol.com/master/assets/qt_creator_build_qgc.ACO6OjKV.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
