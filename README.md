@@ -28,10 +28,10 @@ pip install googletrans==4.0.0rc1
 ```
 python3 ~/qgroundcontrol/translations/tr.py "~/qgroundcontrol/translations/qgc_source_el_GR.ts" en ru
 ```
-## qgc assembly and video streaming
+## Build QGC
 ## Android build
 * ### Install and run Qt
-[qt installer](https://www.qt.io/download-open-source)
+[Qt installer](https://www.qt.io/download-open-source)
 > Required Qt version - 6.6.3
 
 ##### For Ubuntu
@@ -44,10 +44,10 @@ sudo apt install libxcb-cursor0
 >To view a complete list of all available components in Setup's Select Components dialog box, you may need to select the Archive checkbox in the right column under the Categories tab, then click Filter.
 
 1. **In the _Qt 6.6.3 section, select:**
-* Android: Android
-* Qt 5 Compatibility Module
-* Qt Shader Tools
-* Qt Quick 3D
+	* Android: Android
+	* Qt 5 Compatibility Module
+	* Qt Shader Tools
+	* Qt Quick 3D
 ---
 2. **In the Additional Libraries section, select:**
 	* Qt Charts
@@ -78,6 +78,7 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 17)"
 ```
 * **Android SDK Command Line Tools**
 1.Download the latest version for your operating system [Android SDK command line tools](https://developer.android.com/studio/#command-line-tools-only)
+
 2.Unpack to the appropriate path:
 	* #### Linux: ~/Android/Sdk/
 	* #### macOS: ~/Library/Android/sdk/
