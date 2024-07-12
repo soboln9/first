@@ -35,7 +35,7 @@ python3 ~/qgroundcontrol/translations/tr.py "~/qgroundcontrol/translations/qgc_s
 > Required Qt version - 6.6.3
 
 ##### For Ubuntu
-1.Set the downloaded file to executable using: chmod +x.
+1. Set the downloaded file to executable using: chmod +x.
 2. You may also need to install libxcb-cursor:
 ```
 sudo apt install libxcb-cursor0
@@ -98,7 +98,7 @@ sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 * **Android NDK**
 Qt 6.6 uses ndk 25.1.8937393, it can be installed by running:
 ```
-sdkmanager "ndk;26.1.10909125"
+sdkmanager "ndk;25.1.8937393"
 ```
 > More information can be found here [Qt-android](https://doc.qt.io/qt-6/android-getting-started.html)
 ---
