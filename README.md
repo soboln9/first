@@ -78,9 +78,9 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 17)"
 ```
 * **Android SDK Command Line Tools**
 
-1.Download the latest version for your operating system [Android SDK command line tools](https://developer.android.com/studio/#command-line-tools-only)
+1. Download the latest version for your operating system [Android SDK command line tools](https://developer.android.com/studio/#command-line-tools-only)
 
-2.__Unpack to the appropriate path:__
+2. Unpack to the appropriate path:
 	* Linux: ~/Android/Sdk/
 	* macOS: ~/Library/Android/sdk/
   	or
