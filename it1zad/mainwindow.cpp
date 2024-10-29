@@ -307,11 +307,14 @@ void MainWindow::furiefunc(){
         }
     }
     qDebug() << th;
-    for(int c = th + 1; c < N;c++){
-        if(c!= N-th){
+    if(ui->shum->text().toDouble()!=0){
+    for(int c = th + 1; c < N-th;c++){
+        //if(c!= N-th){
             amplitudeabs_shum[c] = 0.0;
-        }
+        //}
     }
+    }
+
     for(int i = 0;i < N;i++){
         lnfurieclearshum->append(chastoti[i], amplitudeabs_shum[i]);
         //заполнили для обратного фурье
@@ -381,6 +384,18 @@ void MainWindow::clearchart(){
         lnclear3->append(t[i], clearsignalafterF_1[i].real());
     }
 
+    double Edelta = 0.;
+    for(int i = 0;i < N;++i){
+        Edelta += pow(dis[i] - clearsignalafterF_1[i].real(), 2);
+    }
+    double Esum = 0.0;
+
+    for(auto &i: amplitudeabs_shum){
+        Esum += std::pow(i,2);
+    }
+
+    double Es = ui->Y->text().toDouble() * Esum;
+    ui->delta->setText(QString::number(Edelta/Es));
 
     clearchartb->setEnabled(false);
 }

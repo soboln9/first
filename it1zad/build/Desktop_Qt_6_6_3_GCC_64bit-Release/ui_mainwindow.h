@@ -59,6 +59,8 @@ public:
     QLineEdit *Y;
     QWidget *verticalLayoutWidget_4;
     QVBoxLayout *verticalLayout_4;
+    QLabel *delta;
+    QLabel *label_15;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -171,6 +173,12 @@ public:
         verticalLayout_4 = new QVBoxLayout(verticalLayoutWidget_4);
         verticalLayout_4->setObjectName("verticalLayout_4");
         verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        delta = new QLabel(centralwidget);
+        delta->setObjectName("delta");
+        delta->setGeometry(QRect(30, 760, 101, 71));
+        label_15 = new QLabel(centralwidget);
+        label_15->setObjectName("label_15");
+        label_15->setGeometry(QRect(60, 700, 67, 17));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -201,6 +209,8 @@ public:
         label_11->setText(QCoreApplication::translate("MainWindow", "Fd", nullptr));
         label_12->setText(QCoreApplication::translate("MainWindow", "a shum", nullptr));
         label_13->setText(QCoreApplication::translate("MainWindow", "     Y", nullptr));
+        delta->setText(QString());
+        label_15->setText(QCoreApplication::translate("MainWindow", "delta", nullptr));
     } // retranslateUi
 
 };
