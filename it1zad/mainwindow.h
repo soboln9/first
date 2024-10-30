@@ -37,10 +37,13 @@ public slots:
     void source_and_shum(/*QVector<double>& diskre*/);
     void furiefunc();
     void clearchart();
+
+    void def();
 private:
     Ui::MainWindow *ui;
     QPushButton* startb;
     QPushButton* clearchartb;
+    QPushButton* defaultpar;
     QVector<double> dis;
     QVector<std::complex<double>> clearsignalafterF_1;
     QVector<double> t;

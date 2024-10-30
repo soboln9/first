@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     clearchartb = new QPushButton(this);
-    clearchartb->setGeometry(100,600,110,90);
+    clearchartb->setGeometry(100,600,130,90);
     clearchartb->setText("Source and clear s");
     clearchartb->setPalette(Qt::yellow);
     clearchartb->setEnabled(false);
@@ -27,6 +27,13 @@ MainWindow::MainWindow(QWidget *parent)
     furiepb->setText(tr("Furie"));
     furiepb->setPalette(Qt::darkBlue);
     connect(furiepb, SIGNAL(clicked(bool)), this, SLOT(furiefunc()));
+
+    defaultpar = new QPushButton(this);
+    defaultpar->setGeometry(100,500,110,90);
+    defaultpar->setText("Default \n parameters");
+    defaultpar->setPalette(Qt::darkCyan);
+    defaultpar->setEnabled(true);
+    connect(defaultpar, SIGNAL(clicked(bool)), this, SLOT(def()));
 //график(х(т))
     graph1 = new QChart();
     v1= new QChartView(this);
@@ -306,11 +313,13 @@ void MainWindow::furiefunc(){
             break;
         }
     }
-    qDebug() << th;
+    //qDebug() << th;
     if(ui->shum->text().toDouble()!=0){
     for(int c = th + 1; c < N-th;c++){
         //if(c!= N-th){
             amplitudeabs_shum[c] = 0.0;
+            outshum[c][0] = 0.0;
+            outshum[c][1] = 0.0;
         //}
     }
     }
@@ -318,8 +327,10 @@ void MainWindow::furiefunc(){
     for(int i = 0;i < N;i++){
         lnfurieclearshum->append(chastoti[i], amplitudeabs_shum[i]);
         //заполнили для обратного фурье
-        outclear[i][0] = amplitudeabs_shum[i];
-        outclear[i][1] = amplitudeabs_shum[i];
+        //outclear[i][0] = amplitudeabs_shum[i];
+        //outclear[i][1] = amplitudeabs_shum[i];
+        outclear[i][0] = outshum[i][0];
+        outclear[i][1] = outshum[i][1];
     }
     fftw_execute(my_plan_clear);
 
@@ -399,14 +410,55 @@ void MainWindow::clearchart(){
 
     clearchartb->setEnabled(false);
 }
+
+void MainWindow::def()
+{
+    ui->A1->setText(QString::number(7));
+    ui->A2->setText(QString::number(12));
+    ui->A3->setText(QString::number(10));
+    ui->f1->setText(QString::number(20));
+    ui->f2->setText(QString::number(15));
+    ui->f3->setText(QString::number(10));
+    ui->fi1->setText(QString::number(9));
+    ui->fi2->setText(QString::number(7));
+    ui->fi3->setText(QString::number(5));
+    ui->N->setText(QString::number(50));
+    ui->fd->setText(QString::number(100));
+    ui->shum->setText(QString::number(0.5));
+    ui->Y->setText(QString::number(0.67));
+
+}
 MainWindow::~MainWindow()
 {
     delete ui;
     delete startb;
-    delete v1;
-
-
-
+    delete clearchartb;
+    delete defaultpar;
+    delete lnshum;
     delete graph1;
+    delete v1;
+    delete ln1;
+    delete axisX1;
+    delete axisT1;
+    delete furiepb;
+    delete axisA;
+    delete axischast;
+    delete bser;
+    delete bset;
+    delete graphgist;
+    delete v2;
+    delete graphfurie;
+    delete v2g;
+    delete ln2;
+    delete axisAg;
+    delete axischastg;
+    delete lnfurieshum;
+    delete lnfurieclearshum;
+    delete graphclear;
+    delete v3;
+    delete lnsources3;
+    delete lnclear3;
+    delete axisX3;
+    delete axisT3;
 }
 

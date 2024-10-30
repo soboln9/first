@@ -163,10 +163,10 @@ public:
         shum->setGeometry(QRect(230, 390, 51, 41));
         label_13 = new QLabel(centralwidget);
         label_13->setObjectName("label_13");
-        label_13->setGeometry(QRect(60, 470, 54, 17));
+        label_13->setGeometry(QRect(20, 470, 54, 17));
         Y = new QLineEdit(centralwidget);
         Y->setObjectName("Y");
-        Y->setGeometry(QRect(50, 500, 51, 41));
+        Y->setGeometry(QRect(20, 500, 51, 41));
         verticalLayoutWidget_4 = new QWidget(centralwidget);
         verticalLayoutWidget_4->setObjectName("verticalLayoutWidget_4");
         verticalLayoutWidget_4->setGeometry(QRect(300, 450, 491, 381));
