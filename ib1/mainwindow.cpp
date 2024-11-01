@@ -24,38 +24,47 @@ MainWindow::MainWindow(QWidget *parent)
 
     loadop = new QPushButton("load op");
     loadop->setParent(this);
-    loadop->setGeometry(270,260,100,100);
+    loadop->setGeometry(270,310,100,100);
     connect(loadop, SIGNAL(clicked()),this,SLOT(loadopslot()));
 
     loadcl = new QPushButton("load cl");
     loadcl->setParent(this);
-    loadcl->setGeometry(270,370,100,100);
+    loadcl->setGeometry(270,420,100,100);
     connect(loadcl, SIGNAL(clicked()),this,SLOT(loadclslot()));
 
     loadkey = new QPushButton("load key");
     loadkey->setParent(this);
-    loadkey->setGeometry(270,480,100,100);
+    loadkey->setGeometry(270,530,100,100);
     connect(loadkey, SIGNAL(clicked()),this,SLOT(loadkeyslot()));
 
     unloadop = new QPushButton("unload op");
     unloadop->setParent(this);
-    unloadop->setGeometry(380,260,100,100);
+    unloadop->setGeometry(380,310,100,100);
     connect(unloadop, SIGNAL(clicked()),this,SLOT(unloadopslot()));
 
     unloadcl = new QPushButton("unload cl");
     unloadcl->setParent(this);
-    unloadcl->setGeometry(380,370,100,100);
+    unloadcl->setGeometry(380,420,100,100);
     connect(unloadcl, SIGNAL(clicked()),this,SLOT(unloadclslot()));
 
     unloadkey = new QPushButton("unload key");
     unloadkey->setParent(this);
-    unloadkey->setGeometry(380,480,100,100);
+    unloadkey->setGeometry(380,530,100,100);
     connect(unloadkey, SIGNAL(clicked()),this,SLOT(unloadkeyslot()));
 }
+QString generateKey(int length) {
+    const QString chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    QString key;
+    for (int i = 0; i < length; ++i) {
+        int index = QRandomGenerator::global()->bounded(chars.length());
+        key.append(chars[index]);
+    }
 
-
+    return key;
+}
 void MainWindow::generickey(){
-    //as for ssh genkey
+    QString key = generateKey(8);
+    ui->key->setText(key);
 }
 
 
@@ -134,7 +143,7 @@ bitset<32> MainWindow::P(bitset<32>& input){
 QVector<bitset<64>> MainWindow::stringiinbinary(QString &input)
 {
     QVector<std::bitset<64>> bitvec;
-    std::string str= input.toLatin1().constData();
+    std::string str= input.toUtf8().constData();
     std::vector<unsigned char> vec (str.begin(),str.end());
     for(int i = 0;i < vec.size();i+=8){
         bitset<64> bits;
@@ -149,6 +158,31 @@ QVector<bitset<64>> MainWindow::stringiinbinary(QString &input)
     }return bitvec;
 }
 
+QVector<std::bitset<64>> MainWindow::hexStringToVector(QString &hexString)
+{
+    QVector<std::bitset<64>> bitvec;
+    std::vector<unsigned char> vec;
+    QString cleanedHex = hexString.simplified();
+    cleanedHex.remove(QRegularExpression("[^0-9A-Fa-f]"));
+    for (int i = 0; i < cleanedHex.length(); i += 2) {
+        QString byteString = cleanedHex.mid(i, 2);
+
+        bool ok;
+        unsigned char byte = static_cast<unsigned char>(byteString.toUInt(&ok, 16));
+        vec.push_back(byte);
+    }
+    for(int i = 0;i < vec.size();i+=8){
+        bitset<64> bits;
+        for(int j = 0;j < 8;j++){
+            bits|=bitset<64>(vec[i+j])<<(56-j*8);
+        }
+        bitset<64>swap;
+        for(int q = 0;q < 64;q++){
+            swap[q] = bits[63-q];
+        }
+        bitvec.push_back(swap);
+    }return bitvec;
+}
 bitset<64> MainWindow::keyiinbinary(QString &key)
 {
     bitset<64> bits;
@@ -399,7 +433,7 @@ bitset<64> MainWindow::decdes(bitset<64> &sourcetxt, bitset<64> &key)
 
 
 void MainWindow::encslot(){
-    QString data = ui->opentext->toPlainText()/*text()*/;
+    QString data = ui->opentext->toPlainText();
     QString key = ui->key->text();
 
     QVector<bitset<64>> input = stringiinbinary(data);
@@ -411,7 +445,6 @@ void MainWindow::encslot(){
         output.push_back(outbit);
     }
 
-
     std::vector<unsigned char> vec;
     for(const auto& bits : output) {
         for(int char_ind = 0; char_ind < 8; char_ind++){
@@ -422,22 +455,31 @@ void MainWindow::encslot(){
             vec.push_back(byte);
         }
     }
+
+    std::stringstream ss;
+    for(unsigned char byte:vec){
+        ss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
+    }
+    QString hexstr = QString::fromStdString(ss.str());
+    ui->hextext->setPlainText(hexstr);
+
+
     std::string str(vec.begin(), vec.end());
-    QString result = QString::fromLatin1(str);
-    //QString result = QString::fromUtf8(str.c_str(),str.length());
-    o = output;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    qDebug()<< data.size();
-    qDebug()<< result.size()<< Qt::endl;
+    //QString result = QString::fromLatin1(str);
+    QString result = QString::fromUtf8(str.c_str(),str.length());
+    //o = output;
     ui->closetext->setPlainText(result);
     ui->opentext->clear();
+    opendatasize = data.size();
 }
 
 void MainWindow::decslot(){
-    QString data = ui->closetext->toPlainText()/*text()*/;
+    //QString data = ui->closetext->toPlainText();
+    QString data = ui->hextext->toPlainText();
     QString key = ui->key->text();
 
-    QVector<bitset<64>> input = stringiinbinary(data);
-
+    //QVector<bitset<64>> input = stringiinbinary(data);
+    QVector<bitset<64>> input = hexStringToVector(data);
     QVector<bitset<64>> output;
     bitset<64> k = keyiinbinary(key);
     for(int i = 0;i < input.size();++i){
@@ -455,16 +497,15 @@ void MainWindow::decslot(){
         }
     }
     std::string str(vec.begin(), vec.end());
-    QString result = QString::fromLatin1(str);
-    //QString result = QString::fromUtf8(str.c_str(),str.length());
-
-    qDebug()<< data.size();
-    qDebug()<< result.size()<< Qt::endl;
+    //QString result = QString::fromLatin1(str);
+    QString result = QString::fromUtf8(str.c_str(),str.length());
+    if(result.size()!=opendatasize){
+        result.chop(result.size()-opendatasize);
+    }
     ui->opentext->setPlainText(result);
 }
 
 void MainWindow::loadopslot(){
-    //genkey->setText("hi");
     QString filepath = "/home/nikita/itqt/txtforib/loadunloadopen.txt";//load to ui-opentext from file
     QFile loadopenfile(filepath);
     if (!loadopenfile.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -477,63 +518,70 @@ void MainWindow::loadopslot(){
 }
 
 void MainWindow::loadclslot(){
-    genkey->setText("hi");
-    QString filepath = "/home/nikita/itqt/txtforib/loadunloadclose.txt";//load in ui-closetext from file
+    //load in ui-closetext from file
+    QString filepath = "/home/nikita/itqt/txtforib/loadunloadclose.txt";
     QFile loadclosefile(filepath);
     if (!loadclosefile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Не удалось открыть файл:" << loadclosefile.errorString();
     }
     QTextStream in(&loadclosefile);
-    in.setEncoding(QStringConverter::Latin1);
+    //in.setEncoding(QStringConverter::Latin1);
     QString closetext = in.readAll();
     loadclosefile.close();
-    ui->closetext->setPlainText(closetext);
+    ui->hextext->setPlainText(closetext);
 }
 
 void MainWindow::loadkeyslot(){
-    genkey->setText("hi");//load in ui-key from file
     QString filepath = "/home/nikita/itqt/txtforib/loadkey.txt";
     QFile keyfile(filepath);
     if (!keyfile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Не удалось открыть файл:" << keyfile.errorString();
     }
     QTextStream in(&keyfile);
-    in.setEncoding(QStringConverter::Latin1);
     QString keytext = in.readAll();
     keyfile.close();
     ui->key->setText(keytext);
 }
 
 void MainWindow::unloadopslot(){
-    QString filepath = "/home/nikita/itqt/txtforib/loadunloadopen.txt";//from ui-opentext load to file
+    //from ui-opentext load to file
+    QString filepath = "/home/nikita/itqt/txtforib/loadunloadopen.txt";
     QFile loadopenfile(filepath);
     if (!loadopenfile.open(QIODevice::WriteOnly | QIODevice::Text)) {
         qDebug() << "Не удалось открыть файл:" << loadopenfile.errorString();
     }
     QTextStream out(&loadopenfile);
-    out.setEncoding(QStringConverter::Latin1);
-    out << ui->opentext->toPlainText()/*text()*/;
+    //out.setEncoding(QStringConverter::Latin1);
+    out << ui->opentext->toPlainText();
     loadopenfile.close();
 }
 
 void MainWindow::unloadclslot(){
     //from ui-opentext load to file
     QString fileName = "/home/nikita/itqt/txtforib/loadunloadclose.txt";
-
     QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         qFatal("Не удалось открыть файл для записи");
     }
-
     QTextStream out(&file);
-    out.setEncoding(QStringConverter::Latin1);
-    out << ui->closetext->toPlainText()/*text()*/;
+    //out.setEncoding(QStringConverter::Latin1);
+    //out << ui->closetext->toPlainText();
+    out << ui->hextext->toPlainText();
     file.close();
-    ui->closetext->clear();
+    ui->hextext->clear();
 }
 
 void MainWindow::unloadkeyslot(){
-    genkey->setText("hi");
+    //from ui-key load to file
+    QString fileName = "/home/nikita/itqt/txtforib/loadkey.txt";
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qFatal("Не удалось открыть файл для записи");
+    }
+    QTextStream out(&file);
+    out << ui->key->text();
+    file.close();
+    ui->key->clear();
 }
 MainWindow::~MainWindow()
 {

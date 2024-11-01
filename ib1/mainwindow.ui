@@ -40,8 +40,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>10</y>
+      <x>390</x>
+      <y>30</y>
       <width>111</width>
       <height>17</height>
      </rect>
@@ -50,21 +50,11 @@
      <string>Open text</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_5">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>70</y>
-      <width>121</width>
-      <height>71</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="closetexthex">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>40</y>
+      <x>710</x>
+      <y>30</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -76,8 +66,8 @@
    <widget class="QLabel" name="closetext2">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>290</y>
+      <x>730</x>
+      <y>340</y>
       <width>91</width>
       <height>20</height>
      </rect>
@@ -89,8 +79,8 @@
    <widget class="QTextEdit" name="opentext">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>40</y>
+      <x>280</x>
+      <y>70</y>
       <width>321</width>
       <height>241</height>
      </rect>
@@ -99,10 +89,20 @@
    <widget class="QTextEdit" name="closetext">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>330</y>
+      <x>610</x>
+      <y>370</y>
       <width>321</width>
       <height>281</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="hextext">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>70</y>
+      <width>321</width>
+      <height>241</height>
      </rect>
     </property>
    </widget>

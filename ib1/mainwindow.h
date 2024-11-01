@@ -11,6 +11,7 @@
 #include <vector>
 #include <string>
 #include <QTextStream>
+#include <QRegularExpression>
 using namespace std;
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -31,6 +32,7 @@ public:
     QVector<bitset<48>> generate_round_keys(bitset<64>& key);
     bitset<64> IP_1(bitset<64>& block);
     QVector<bitset<64>> stringiinbinary(QString& input);
+    QVector<std::bitset<64>> hexStringToVector(QString& hexString);
     bitset<64> keyiinbinary(QString& key);
 
     bitset<64> encdes(bitset<64>& sourcetxt, bitset<64>& key);
@@ -66,6 +68,7 @@ private:
 
     QVector<bitset<64>> ks;
     QVector<bitset<64>> o;
+    int opendatasize = 0;
 
 };
 #endif // MAINWINDOW_H
