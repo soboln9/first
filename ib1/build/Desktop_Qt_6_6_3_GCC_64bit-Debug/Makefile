@@ -1001,6 +1001,16 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtCore/QString \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QRandomGenerator \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qrandom.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QFile \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qfile.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QVector \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qvector.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QTextStream \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QRegularExpression \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qregularexpression.h \
 		moc_predefs.h \
 		../../../../Qt/6.6.3/gcc_64/libexec/moc
 	/home/nikita/Qt/6.6.3/gcc_64/libexec/moc $(DEFINES) --include /home/nikita/itqt/ib1/build/Desktop_Qt_6_6_3_GCC_64bit-Debug/moc_predefs.h -I/home/nikita/Qt/6.6.3/gcc_64/mkspecs/linux-clang -I/home/nikita/itqt/ib1 -I/home/nikita/Qt/6.6.3/gcc_64/include -I/home/nikita/Qt/6.6.3/gcc_64/include/QtWidgets -I/home/nikita/Qt/6.6.3/gcc_64/include/QtGui -I/home/nikita/Qt/6.6.3/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/llvm-14/lib/clang/14.0.0/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
@@ -1194,6 +1204,16 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtCore/QString \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QRandomGenerator \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qrandom.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QFile \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qfile.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QVector \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qvector.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QTextStream \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QRegularExpression \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qregularexpression.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/QApplication \
 		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qapplication.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1386,7 +1406,60 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../../../../Qt/6.6.3/gcc_64/include/QtCore/QString \
-		ui_mainwindow.h
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QRandomGenerator \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qrandom.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QFile \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qfile.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QVector \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qvector.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QTextStream \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QRegularExpression \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qregularexpression.h \
+		ui_mainwindow.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/QVariant \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qfuture.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qfutureinterface.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qmutex.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qdeadlinetimer.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qelapsedtimer.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qtsan_impl.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qresultstore.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qfuture_impl.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qthreadpool.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qthread.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qrunnable.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qexception.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qpromise.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtCore/qlocale.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtGui/qguiapplication_platform.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/QLabel \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtGui/qpicture.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtGui/qtextdocument.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/QLineEdit \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtGui/qtextoption.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/QMenuBar \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qmenubar.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qmenu.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/QStatusBar \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/QTextEdit \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qtextedit.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.6.3/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 

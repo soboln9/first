@@ -41,29 +41,37 @@ constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::string
     "MainWindow",
     "generickey",
     "",
-    "encslot",
-    "decslot",
+    "encdesslot",
+    "decdesslot",
     "loadopslot",
     "loadclslot",
     "loadkeyslot",
     "unloadopslot",
     "unloadclslot",
-    "unloadkeyslot"
+    "unloadkeyslot",
+    "on_des_box_clicked",
+    "on_rsa_box_clicked",
+    "on_encrsa_clicked",
+    "on_decrsa_clicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
-    uint offsetsAndSizes[22];
+    uint offsetsAndSizes[30];
     char stringdata0[11];
     char stringdata1[11];
     char stringdata2[1];
-    char stringdata3[8];
-    char stringdata4[8];
+    char stringdata3[11];
+    char stringdata4[11];
     char stringdata5[11];
     char stringdata6[11];
     char stringdata7[12];
     char stringdata8[13];
     char stringdata9[13];
     char stringdata10[14];
+    char stringdata11[19];
+    char stringdata12[19];
+    char stringdata13[18];
+    char stringdata14[18];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -72,26 +80,34 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(0, 10),  // "MainWindow"
         QT_MOC_LITERAL(11, 10),  // "generickey"
         QT_MOC_LITERAL(22, 0),  // ""
-        QT_MOC_LITERAL(23, 7),  // "encslot"
-        QT_MOC_LITERAL(31, 7),  // "decslot"
-        QT_MOC_LITERAL(39, 10),  // "loadopslot"
-        QT_MOC_LITERAL(50, 10),  // "loadclslot"
-        QT_MOC_LITERAL(61, 11),  // "loadkeyslot"
-        QT_MOC_LITERAL(73, 12),  // "unloadopslot"
-        QT_MOC_LITERAL(86, 12),  // "unloadclslot"
-        QT_MOC_LITERAL(99, 13)   // "unloadkeyslot"
+        QT_MOC_LITERAL(23, 10),  // "encdesslot"
+        QT_MOC_LITERAL(34, 10),  // "decdesslot"
+        QT_MOC_LITERAL(45, 10),  // "loadopslot"
+        QT_MOC_LITERAL(56, 10),  // "loadclslot"
+        QT_MOC_LITERAL(67, 11),  // "loadkeyslot"
+        QT_MOC_LITERAL(79, 12),  // "unloadopslot"
+        QT_MOC_LITERAL(92, 12),  // "unloadclslot"
+        QT_MOC_LITERAL(105, 13),  // "unloadkeyslot"
+        QT_MOC_LITERAL(119, 18),  // "on_des_box_clicked"
+        QT_MOC_LITERAL(138, 18),  // "on_rsa_box_clicked"
+        QT_MOC_LITERAL(157, 17),  // "on_encrsa_clicked"
+        QT_MOC_LITERAL(175, 17)   // "on_decrsa_clicked"
     },
     "MainWindow",
     "generickey",
     "",
-    "encslot",
-    "decslot",
+    "encdesslot",
+    "decdesslot",
     "loadopslot",
     "loadclslot",
     "loadkeyslot",
     "unloadopslot",
     "unloadclslot",
-    "unloadkeyslot"
+    "unloadkeyslot",
+    "on_des_box_clicked",
+    "on_rsa_box_clicked",
+    "on_encrsa_clicked",
+    "on_decrsa_clicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -103,7 +119,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -111,17 +127,25 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   68,    2, 0x08,    1 /* Private */,
-       3,    0,   69,    2, 0x08,    2 /* Private */,
-       4,    0,   70,    2, 0x08,    3 /* Private */,
-       5,    0,   71,    2, 0x08,    4 /* Private */,
-       6,    0,   72,    2, 0x08,    5 /* Private */,
-       7,    0,   73,    2, 0x08,    6 /* Private */,
-       8,    0,   74,    2, 0x08,    7 /* Private */,
-       9,    0,   75,    2, 0x08,    8 /* Private */,
-      10,    0,   76,    2, 0x08,    9 /* Private */,
+       1,    0,   92,    2, 0x08,    1 /* Private */,
+       3,    0,   93,    2, 0x08,    2 /* Private */,
+       4,    0,   94,    2, 0x08,    3 /* Private */,
+       5,    0,   95,    2, 0x08,    4 /* Private */,
+       6,    0,   96,    2, 0x08,    5 /* Private */,
+       7,    0,   97,    2, 0x08,    6 /* Private */,
+       8,    0,   98,    2, 0x08,    7 /* Private */,
+       9,    0,   99,    2, 0x08,    8 /* Private */,
+      10,    0,  100,    2, 0x08,    9 /* Private */,
+      11,    0,  101,    2, 0x08,   10 /* Private */,
+      12,    0,  102,    2, 0x08,   11 /* Private */,
+      13,    0,  103,    2, 0x08,   12 /* Private */,
+      14,    0,  104,    2, 0x08,   13 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -146,9 +170,9 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
         // method 'generickey'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'encslot'
+        // method 'encdesslot'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'decslot'
+        // method 'decdesslot'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'loadopslot'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
@@ -161,6 +185,14 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'unloadclslot'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'unloadkeyslot'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_des_box_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_rsa_box_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_encrsa_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_decrsa_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -173,14 +205,18 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->generickey(); break;
-        case 1: _t->encslot(); break;
-        case 2: _t->decslot(); break;
+        case 1: _t->encdesslot(); break;
+        case 2: _t->decdesslot(); break;
         case 3: _t->loadopslot(); break;
         case 4: _t->loadclslot(); break;
         case 5: _t->loadkeyslot(); break;
         case 6: _t->unloadopslot(); break;
         case 7: _t->unloadclslot(); break;
         case 8: _t->unloadkeyslot(); break;
+        case 9: _t->on_des_box_clicked(); break;
+        case 10: _t->on_rsa_box_clicked(); break;
+        case 11: _t->on_encrsa_clicked(); break;
+        case 12: _t->on_decrsa_clicked(); break;
         default: ;
         }
     }
@@ -206,13 +242,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 13)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 9;
+        _id -= 13;
     }
     return _id;
 }

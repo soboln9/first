@@ -11,10 +11,12 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
@@ -33,6 +35,18 @@ public:
     QTextEdit *opentext;
     QTextEdit *closetext;
     QTextEdit *hextext;
+    QCheckBox *des_box;
+    QCheckBox *rsa_box;
+    QLineEdit *n;
+    QLineEdit *e;
+    QLineEdit *d;
+    QLabel *label_3;
+    QLabel *label_4;
+    QLabel *label_5;
+    QPushButton *encrsa;
+    QPushButton *decrsa;
+    QPushButton *myencrsa;
+    QPushButton *mydecrsa;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -67,6 +81,42 @@ public:
         hextext = new QTextEdit(centralwidget);
         hextext->setObjectName("hextext");
         hextext->setGeometry(QRect(610, 70, 321, 241));
+        des_box = new QCheckBox(centralwidget);
+        des_box->setObjectName("des_box");
+        des_box->setGeometry(QRect(950, 40, 92, 23));
+        rsa_box = new QCheckBox(centralwidget);
+        rsa_box->setObjectName("rsa_box");
+        rsa_box->setGeometry(QRect(950, 70, 92, 23));
+        n = new QLineEdit(centralwidget);
+        n->setObjectName("n");
+        n->setGeometry(QRect(960, 300, 113, 25));
+        e = new QLineEdit(centralwidget);
+        e->setObjectName("e");
+        e->setGeometry(QRect(960, 360, 113, 25));
+        d = new QLineEdit(centralwidget);
+        d->setObjectName("d");
+        d->setGeometry(QRect(960, 420, 113, 25));
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName("label_3");
+        label_3->setGeometry(QRect(1010, 280, 67, 17));
+        label_4 = new QLabel(centralwidget);
+        label_4->setObjectName("label_4");
+        label_4->setGeometry(QRect(1010, 330, 67, 17));
+        label_5 = new QLabel(centralwidget);
+        label_5->setObjectName("label_5");
+        label_5->setGeometry(QRect(1010, 390, 67, 17));
+        encrsa = new QPushButton(centralwidget);
+        encrsa->setObjectName("encrsa");
+        encrsa->setGeometry(QRect(970, 460, 91, 81));
+        decrsa = new QPushButton(centralwidget);
+        decrsa->setObjectName("decrsa");
+        decrsa->setGeometry(QRect(1070, 460, 91, 81));
+        myencrsa = new QPushButton(centralwidget);
+        myencrsa->setObjectName("myencrsa");
+        myencrsa->setGeometry(QRect(950, 100, 171, 81));
+        mydecrsa = new QPushButton(centralwidget);
+        mydecrsa->setObjectName("mydecrsa");
+        mydecrsa->setGeometry(QRect(950, 190, 171, 81));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -88,6 +138,15 @@ public:
         label_2->setText(QCoreApplication::translate("MainWindow", "Open text", nullptr));
         closetexthex->setText(QCoreApplication::translate("MainWindow", "Close text hex", nullptr));
         closetext2->setText(QCoreApplication::translate("MainWindow", "Close text", nullptr));
+        des_box->setText(QCoreApplication::translate("MainWindow", "DES", nullptr));
+        rsa_box->setText(QCoreApplication::translate("MainWindow", "RSA", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "n", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "e", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "d", nullptr));
+        encrsa->setText(QCoreApplication::translate("MainWindow", "encrsa>>", nullptr));
+        decrsa->setText(QCoreApplication::translate("MainWindow", "decrsa<<", nullptr));
+        myencrsa->setText(QCoreApplication::translate("MainWindow", "my n e d forencrsa>>", nullptr));
+        mydecrsa->setText(QCoreApplication::translate("MainWindow", "my n e d fordecrsa<<", nullptr));
     } // retranslateUi
 
 };

@@ -11,16 +11,19 @@ MainWindow::MainWindow(QWidget *parent)
     genkey->setGeometry(50,260,100,100);
     genkey->setAutoDefault(true);
     connect(genkey, SIGNAL(clicked()),this,SLOT(generickey()));
+    genkey->setEnabled(0);
 
-    encrip = new QPushButton("enc>>");
+    encrip = new QPushButton("encdes>>");
     encrip->setParent(this);
     encrip->setGeometry(QRect(150, 360,100,100));
-    connect(encrip, SIGNAL(clicked(bool)), this,SLOT(encslot()));
+    connect(encrip, SIGNAL(clicked(bool)), this,SLOT(encdesslot()));
+    encrip->setEnabled(0);
 
-    decrip = new QPushButton("<<dec");
+    decrip = new QPushButton("<<decdes");
     decrip->setParent(this);
     decrip->setGeometry(QRect(50, 360,100,100));
-    connect(decrip, SIGNAL(clicked(bool)), this,SLOT(decslot()));
+    connect(decrip, SIGNAL(clicked(bool)), this,SLOT(decdesslot()));
+    decrip->setEnabled(0);
 
     loadop = new QPushButton("load op");
     loadop->setParent(this);
@@ -51,7 +54,17 @@ MainWindow::MainWindow(QWidget *parent)
     unloadkey->setParent(this);
     unloadkey->setGeometry(380,530,100,100);
     connect(unloadkey, SIGNAL(clicked()),this,SLOT(unloadkeyslot()));
+
+    ui->encrsa->setEnabled(false);
+    ui->decrsa->setEnabled(false);
+    ui->myencrsa->setEnabled(false);
+    ui->mydecrsa->setEnabled(false);
+    ui->n->setText(QString::number(3233));
+    ui->e->setText(QString::number(17));
+    ui->d->setText(QString::number(2753));
+
 }
+
 QString generateKey(int length) {
     const QString chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     QString key;
@@ -66,8 +79,6 @@ void MainWindow::generickey(){
     QString key = generateKey(8);
     ui->key->setText(key);
 }
-
-
 
 static QVector<int> IP_Table = {
     58, 50, 42, 34, 26, 18, 10, 2,
@@ -105,6 +116,7 @@ bitset<64> MainWindow::IP_1(bitset<64> &block){
     }
     return tmp;
 }//end
+
 static QVector<int> Expanded_Table = {
     32 ,1 ,2 ,3 ,4 ,5 ,
     4 ,5 ,6 ,7 ,8 ,9 ,
@@ -115,6 +127,7 @@ static QVector<int> Expanded_Table = {
     24 ,25 ,26 ,27 ,28 ,29 ,
     28 ,29 ,30 ,31 ,32, 1
 };
+
 bitset<48> MainWindow::Expand(bitset<32>& halfblock){
     bitset<48> expandset;
     for(int i = 0;i < expandset.size();i++){
@@ -166,7 +179,6 @@ QVector<std::bitset<64>> MainWindow::hexStringToVector(QString &hexString)
     cleanedHex.remove(QRegularExpression("[^0-9A-Fa-f]"));
     for (int i = 0; i < cleanedHex.length(); i += 2) {
         QString byteString = cleanedHex.mid(i, 2);
-
         bool ok;
         unsigned char byte = static_cast<unsigned char>(byteString.toUInt(&ok, 16));
         vec.push_back(byte);
@@ -183,6 +195,7 @@ QVector<std::bitset<64>> MainWindow::hexStringToVector(QString &hexString)
         bitvec.push_back(swap);
     }return bitvec;
 }
+
 bitset<64> MainWindow::keyiinbinary(QString &key)
 {
     bitset<64> bits;
@@ -205,6 +218,7 @@ static QVector<int> K1_Table = {
     22, 14, 6, 61, 53, 45, 37, 29, 21, 13,
     5, 28, 20, 12, 4
 };
+
 static QVector<int> K2_Table = {
     14 ,17 ,11 ,24 ,1 ,5 ,
     3 ,28 ,15 ,6 ,21 ,10 ,
@@ -216,6 +230,7 @@ static QVector<int> K2_Table = {
     44 ,49 ,39 ,56 ,
     34 ,53 ,46, 42, 50, 36, 29, 32
 };
+
 const int shifts[16] = {1 ,1 ,2 ,2 ,
                         2 ,2 ,2 ,2 ,
                         1 ,2 ,2 ,2 ,
@@ -272,6 +287,7 @@ QVector<bitset<48>> MainWindow::generate_round_keys(bitset<64> &key)
         }
     } return round_keys;
 }
+
 QVector<QVector<QVector<int>>> S_Table =
     {
         {
@@ -343,8 +359,6 @@ bitset<32> MainWindow::S(bitset<48> & afterxor){
     }
     return output;
 }
-
-
 
 bitset<64> MainWindow::encdes(bitset<64> &sourcetxt, bitset<64>& key)
 {
@@ -431,8 +445,7 @@ bitset<64> MainWindow::decdes(bitset<64> &sourcetxt, bitset<64> &key)
 
 
 
-
-void MainWindow::encslot(){
+void MainWindow::encdesslot(){
     QString data = ui->opentext->toPlainText();
     QString key = ui->key->text();
 
@@ -473,7 +486,7 @@ void MainWindow::encslot(){
     opendatasize = data.size();
 }
 
-void MainWindow::decslot(){
+void MainWindow::decdesslot(){
     //QString data = ui->closetext->toPlainText();
     QString data = ui->hextext->toPlainText();
     QString key = ui->key->text();
@@ -499,14 +512,15 @@ void MainWindow::decslot(){
     std::string str(vec.begin(), vec.end());
     //QString result = QString::fromLatin1(str);
     QString result = QString::fromUtf8(str.c_str(),str.length());
-    if(result.size()!=opendatasize){
+    if(result.size()>opendatasize){
         result.chop(result.size()-opendatasize);
     }
     ui->opentext->setPlainText(result);
 }
 
 void MainWindow::loadopslot(){
-    QString filepath = "/home/nikita/itqt/txtforib/loadunloadopen.txt";//load to ui-opentext from file
+    //load to ui-opentext from file
+    QString filepath = "/home/nikita/itqt/txtforib/loadunloadopen.txt";
     QFile loadopenfile(filepath);
     if (!loadopenfile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Не удалось открыть файл:" << loadopenfile.errorString();
@@ -551,8 +565,8 @@ void MainWindow::unloadopslot(){
         qDebug() << "Не удалось открыть файл:" << loadopenfile.errorString();
     }
     QTextStream out(&loadopenfile);
-    //out.setEncoding(QStringConverter::Latin1);
-    out << ui->opentext->toPlainText();
+   // out.setEncoding(QStringConverter::Latin1);
+     out << ui->opentext->toPlainText();
     loadopenfile.close();
 }
 
@@ -583,7 +597,245 @@ void MainWindow::unloadkeyslot(){
     file.close();
     ui->key->clear();
 }
+
+/////////////////////////////////////////////////RSA
+unsigned long long MainWindow::generate_p_q() {
+    unsigned long long start = 2;
+    unsigned long long end = pow(2, 16);
+    while (true) {
+        unsigned long long simple = rand() % (end - start + 1) + start;
+        if (ferma(simple, 100))
+            return simple;
+    }
+}
+
+bool MainWindow::ferma(unsigned long long simple, int k) {
+    if (simple <= 1)
+        return false;
+    if (simple <= 3)
+        return true;
+    if (simple % 2 == 0)
+        return false;
+    for (int c = 0; c < k; c++) {
+        unsigned long long a = rand() % (simple - 3) + 2;
+        if(gcd(a, simple) != 1)
+            return false;
+        if (mod(a, simple - 1, simple) != 1)  // Модификация для использования unsigned long long
+            return false;
+    }
+    return true;
+}
+////////////////////////a число s степень simple == p or q(modul)
+unsigned long long MainWindow::mod(unsigned long long base, unsigned long long s, unsigned long long modul) {
+    unsigned long long res = 1;
+    base = base % modul;
+    while (s > 0) {
+        if (s % 2 == 1)
+            res = (res * base) % modul;
+        base = (base * base) % modul;
+        s /= 2;
+    }
+    return res;
+}
+
+//взаимно простые имеют наименьший общий делитель равный единице
+unsigned long long MainWindow::gcd(unsigned long long a, unsigned long long b) {
+    while (b != 0) {
+        unsigned long long temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+unsigned long long MainWindow::n(unsigned long long p, unsigned long long q) {return p * q;}
+
+unsigned long long MainWindow::fi(unsigned long long p, unsigned long long q) {return (p - 1) * (q - 1);}
+
+unsigned long long MainWindow::e(unsigned long long fi) {
+    unsigned long long start = 1;
+    unsigned long long end = fi;
+    while (true) {
+        unsigned long long e = rand() % (end - start + 1) + start;
+        if (gcd(e, fi) == 1)  // Проверка на взаимную простоту
+            return e;
+    }
+}
+////////////////////////////expand Evklid
+unsigned long long MainWindow::extended_gcd(unsigned long long a, unsigned long long b, long long &x, long long &y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    } else {
+        long long x1, y1;
+        unsigned long long gcd = extended_gcd(b, a % b, x1, y1);  // Рекурсивный вызов
+        x = y1;
+        y = x1 - (a / b) * y1;
+        return gcd;
+    }
+}
+unsigned long long MainWindow::d(unsigned long long e, unsigned long long fi) {
+    long long x, y;  // x * e + y * fi = 1
+    extended_gcd(e, fi, x, y);
+    unsigned long long d = (x % fi + fi) % fi;  // Приводим x к положительному значению
+    return d;
+}
+
+std::vector<unsigned long long> MainWindow::stringToNumbers(const QString &input) {
+    std::vector<unsigned long long> numbers;
+    for (QChar ch : input) {
+        numbers.push_back(static_cast<unsigned long long>(ch.unicode()));
+    }
+    return numbers;
+}
+
+QString MainWindow::numbersToString(const std::vector<unsigned long long> &numbers) {
+    std::string text;
+    for (unsigned long long num : numbers) {
+        text.push_back(static_cast<char>(num));
+    }
+    QString output = QString::fromStdString(text);
+    return output;
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_des_box_clicked()
+{
+    encrip->setEnabled(ui->des_box->isChecked());
+    decrip->setEnabled(ui->des_box->isChecked());
+    genkey->setEnabled(ui->des_box->isChecked());
+}
+
+
+void MainWindow::on_rsa_box_clicked()
+{
+    ui->encrsa->setEnabled(ui->rsa_box->isChecked());
+    ui->decrsa->setEnabled(ui->rsa_box->isChecked());
+    ui->myencrsa->setEnabled(ui->rsa_box->isChecked());
+    ui->mydecrsa->setEnabled(ui->rsa_box->isChecked());
+}
+
+
+void MainWindow::on_encrsa_clicked()
+{
+    srand(time(NULL));
+    qDebug()<< mod(2,10,1000);
+    cipher.clear();
+    unsigned long long p = generate_p_q();
+    unsigned long long q = generate_p_q();
+    unsigned long long n = this->n(p, q);
+    unsigned long long fi = this->fi(p, q);
+    unsigned long long e = 0;
+    unsigned long long d = 0;
+    while((d*e)%fi != 1){
+        qDebug()<<"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"<<Qt::endl;
+        e = this->e(fi);
+        d = this->d(e, fi);
+    }
+    ui->n->setText(QString::number(n));
+    ui->e->setText(QString::number(e));
+    ui->d->setText(QString::number(d));
+    std::vector<unsigned long long> numbers = stringToNumbers(ui->opentext->toPlainText());
+
+    for (unsigned long long& num : numbers)
+    {
+        cipher.push_back(mod(num, e, n));
+    }
+
+    QString str = QString::number(cipher[0]);
+    for(int i = 1;i < cipher.size();i++)
+    {
+        str += " " + QString::number(cipher[i]);
+    }
+    ui->closetext->setPlainText(str);
+
+
+//////////////////////////HEX
+    std::stringstream ss;
+    for(unsigned long long& num:cipher){
+        ss << std::hex << std::setw(2) << std::setfill('0') << num;
+    }
+    QString hexstr = QString::fromStdString(ss.str());
+    ui->hextext->setPlainText(hexstr);
+}
+
+
+void MainWindow::on_decrsa_clicked()
+{
+    unsigned long long n = ui->n->text().toULongLong();
+    unsigned long long d = ui->d->text().toULongLong();
+    qDebug()<<n<<" "<<d;
+    std::vector<unsigned long long> numbers;
+    QStringList list = ui->closetext->toPlainText().split(" ");
+    std::vector<unsigned long long> numb;
+    for(QString& num : list)
+    {
+        numb.push_back(num.toULongLong());
+    }
+
+    for (unsigned long long& c : numb)
+    {
+        numbers.push_back(mod(c, d, n));
+    }
+    QString str = numbersToString(numbers);
+    ui->opentext->setPlainText(str);
+}
+
+
+void MainWindow::on_myencrsa_clicked()
+{
+    unsigned long long n = ui->n->text().toULongLong();
+    unsigned long long e = ui->e->text().toULongLong();
+    std::vector<unsigned long long> numbers = stringToNumbers(ui->opentext->toPlainText());
+    for (unsigned long long& num : numbers)
+    {
+        cipher.push_back(mod(num, e, n));
+    }
+    QString str = QString::number(cipher[0]);
+    for(int i = 1;i < cipher.size();i++)
+    {
+        str += " " + QString::number(cipher[i]);
+    }
+    ui->closetext->setPlainText(str);
+
+
+
+
+
+//////////////////////HEX
+    std::stringstream ss;
+    for(unsigned long long& num:cipher){
+        ss << std::hex << std::setw(2) << std::setfill('0') << num;
+    }
+    QString hexstr = QString::fromStdString(ss.str());
+    ui->hextext->setPlainText(hexstr);
+}
+
+
+void MainWindow::on_mydecrsa_clicked()
+{
+    unsigned long long n = ui->n->text().toULongLong();
+    unsigned long long d = ui->d->text().toULongLong();
+
+    QStringList list = ui->closetext->toPlainText().split(" ");
+    std::vector<unsigned long long> numb;
+    for(QString& num : list)
+    {
+        numb.push_back(num.toULongLong());
+    }
+
+
+    std::vector<unsigned long long> numbers;
+    for (unsigned long long& c : numb)
+    {
+        numbers.push_back(mod(c, d, n));
+    }
+    QString str = numbersToString(numbers);
+    ui->opentext->setPlainText(str);
+}
+
